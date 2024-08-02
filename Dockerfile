@@ -12,6 +12,7 @@ RUN apt-get update \
   && rm -rf /tmp/*
 
 COPY presentation /mysite
+COPY presentation/html /usr/share/nginx/html/html
 
 RUN quarto render /mysite/index.ipynb --output-dir /usr/share/nginx/html/
 
