@@ -1,0 +1,23 @@
+<script>
+  function custom_title_slide_footer() {
+    let footer = document.querySelector('div.footer');
+
+    let title_slide = document.querySelector("section#title-slide");
+    let title_slide_footer = title_slide.getAttribute('data-footer');
+    let global_footer_text = footer.innerHTML;
+
+    if (title_slide.classList.contains('present')) {
+      footer.innerHTML = title_slide_footer;
+    }
+  
+    Reveal.on('slidechanged', event => {  
+      if(Reveal.isFirstSlide()) {
+        footer.innerHTML = title_slide_footer;
+      } else {
+        footer.innerHTML = global_footer_text;
+      }
+    });
+  }
+  
+  window.onload = custom_title_slide_footer();
+</script>
