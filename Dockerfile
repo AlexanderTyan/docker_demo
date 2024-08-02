@@ -1,4 +1,4 @@
-FROM nginx@sha256:6af79ae5de407283dcea8b00d5c37ace95441fd58a8b1d2aa1ed93f5511bb18c
+FROM nginx@sha256:6af79ae5de407283dcea8b00d5c37ace95441fd58a8b1d2aa1ed93f5511bb18c AS build
 
 RUN apt-get update \ 
   && apt-get -y install wget ca-certificates \
@@ -13,6 +13,9 @@ RUN apt-get update \
 
 COPY presentation /mysite
 
-RUN quarto render /mysite/docker_tutorial.ipynb --output /usr/share/nginx/html/index.html
+RUN quarto render /mysite/index.ipynb --output-dir /usr/share/nginx/html/
+
+FROM nginx@sha256:6af79ae5de407283dcea8b00d5c37ace95441fd58a8b1d2aa1ed93f5511bb18c
+COPY --from=build /usr/share/nginx/html /usr/share/nginx/html
 
 EXPOSE 80
