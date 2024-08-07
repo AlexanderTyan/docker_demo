@@ -1,6 +1,8 @@
 # Quick Setup
 
-In Linux CLI, `cd` to this repo's directory and do:
+`git clone` this repo locally. 
+
+Then, in Linux CLI, `cd` to this repo's directory and do:
 ```bash
 docker build -t docker_quarto_image .
 ```
